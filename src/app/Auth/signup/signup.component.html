@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <title>Inscription</title>
+</head>
+<body>
+
+  <div class="container d-flex align-items-center justify-content-center">
+    <div class="row w-100">
+      
+      <!-- Logo à gauche -->
+      <div class="col-md-6 text-center d-flex align-items-center justify-content-center">
+        <img src="images/logo.png" alt="Logo" class="logo">
+      </div>
+
+      <!-- Formulaire à droite -->
+      <div class="col-md-6">
+        <div class="card shadow-lg p-4">
+          <div class="card-body">
+            <ul class="nav nav-pills nav-justified mb-4">
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Connexion</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/signup">Inscription</a>
+              </li>
+            </ul>
+
+            <h2 class="text-center mb-4">Connexion</h2>
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="Prénom" formControlName="first_name" />
+                    <div *ngIf="registerForm.get('first_name')?.invalid && (registerForm.get('first_name')?.touched || registerForm.get('first_name')?.dirty)">
+                      <small class="text-danger">Le prénom est requis.</small> <br>
+                      <small *ngIf="registerForm.get('first_name')?.hasError('minlength')" class="text-danger">Le prénom doit contenir au moins 2 caractères.</small>
+                    </div>
+                  </div>
+  
+                  <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="Nom" formControlName="last_name" />
+                    <div *ngIf="registerForm.get('last_name')?.invalid && (registerForm.get('last_name')?.touched || registerForm.get('last_name')?.dirty)">
+                      <small class="text-danger">Le nom est requis.</small> <br>
+                      <small *ngIf="registerForm.get('last_name')?.hasError('minlength')" class="text-danger">Le nom doit contenir au moins 2 caractères.</small>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <input type="email" class="form-control" placeholder="Email" formControlName="email" />
+                    <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.touched || registerForm.get('email')?.dirty)">
+                      <small class="text-danger">L'email est requis et doit être valide.</small>
+                    </div>
+                  </div>
+  
+                  <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="Adresse" formControlName="adress" />
+                    <div *ngIf="registerForm.get('adress')?.invalid && (registerForm.get('adress')?.touched || registerForm.get('adress')?.dirty)">
+                      <small class="text-danger">L'adresse est requise.</small>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <input type="tel" class="form-control" placeholder="Téléphone" formControlName="phone_number" />
+                    <div *ngIf="registerForm.get('phone_number')?.invalid && (registerForm.get('phone_number')?.touched || registerForm.get('phone_number')?.dirty)">
+                      <small class="text-danger">Le numéro de téléphone est requis.</small>  <br>
+                      <small *ngIf="registerForm.get('phone_number')?.hasError('pattern')" class="text-danger">Le numéro de téléphone doit contenir uniquement des chiffres.</small>
+                    </div>
+                  </div>
+  
+                  <div class="form-group col-md-6">
+                    <input type="date" class="form-control" placeholder="Date de naissance" formControlName="day_of_birth" />
+                    <div *ngIf="registerForm.get('day_of_birth')?.invalid && (registerForm.get('day_of_birth')?.touched || registerForm.get('day_of_birth')?.dirty)">
+                      <small class="text-danger">La date de naissance est requise.</small>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <input type="password" class="form-control" placeholder="Mot de passe" formControlName="password" />
+                    <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.touched || registerForm.get('password')?.dirty)">
+                      <small class="text-danger">Le mot de passe doit contenir au moins 6 caractères.</small>
+                    </div>
+                  </div>
+  
+                  <div class="form-group col-md-6">
+                    <label for="photo">Photo</label>
+                    <input type="file" class="form-control-file" (change)="onFileChange($event)" accept="image/*" />
+                  </div>
+                </div>
+  
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="registerForm.invalid">S'inscrire</button>
+              </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
+
