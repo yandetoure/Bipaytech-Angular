@@ -8,6 +8,7 @@ import { AuthGuard } from './auth.guard';
 import { InvoicesComponent } from './Agent/invoices/invoices.component';
 import { ClientsListComponent } from './Agent/clients-list/clients-list.component';
 import { InvoiceDetailComponent } from './Agent/invoice-details/invoice-details.component';
+import { UploadInvoiceComponent } from './Agent/upload-invoice/upload-invoice.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' }, 
@@ -18,7 +19,8 @@ export const routes: Routes = [
     { path: 'agent/settings', component: SettingsComponent },
     { path: 'agent/invoices', component: InvoicesComponent },
     { path: 'clients/list', component: ClientsListComponent },
-    { path: 'invoice/details', component:   InvoiceDetailComponent  }
+    { path: 'invoice/details', component:   InvoiceDetailComponent},
+    { path: 'upload/invoice', component: UploadInvoiceComponent}
 
   // { path: 'dashboard/agent', component: AgentComponent , canActivate: [AuthGuard], data: { role: 'agent' } },
 ];

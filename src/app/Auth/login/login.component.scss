@@ -1,28 +1,63 @@
+/* ✅ Bouton personnalisé */
+.btn-red {
+    background: linear-gradient(45deg, #e63946, #d62828); /* Dégradé rouge */
+    border: none;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 8px; /* Bords arrondis */
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-red:hover {
+    background: linear-gradient(45deg, #d62828, #b71c1c);
+    transform: scale(1.05); /* Effet d'agrandissement au survol */
+}
+
+/* ✅ Styles pour l'onglet actif */
+.nav-pills .nav-link {
+    color: #333;
+    font-size: 16px;
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #e63946; /* Fond rouge */
+    color: white;
+    border-radius: 8px; /* Arrondi pour un effet plus moderne */
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Centrage de la page */
 body {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #f8f9fa;
 }
 
+/* ✅ Centrage du contenu */
 .container {
     height: 80vh;
-    
 }
 
+/* ✅ Style du logo */
 .logo {
     max-width: 80%;
     height: auto;
 }
 
+/* ✅ Style de la carte */
 .card {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     width: 500px;
-
 }
 
-
+/* ✅ Responsivité */
 @media (max-width: 768px) {
     .row {
         flex-direction: column;
