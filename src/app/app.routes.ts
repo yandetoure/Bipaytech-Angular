@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { AgentComponent } from './Dashboard/agent/agent.component';
 import { SettingsComponent } from './Agent/settings/settings.component';
 import { AuthGuard } from './auth.guard';
+import { InvoicesComponent } from './Agent/invoices/invoices.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' }, 
@@ -13,6 +14,7 @@ export const routes: Routes = [
     { path: 'signup', component: SignupComponent},
     { path: 'dashboard/agent', component: AgentComponent},
     { path: 'agent/settings', component: SettingsComponent },
+    { path: 'agent/invoices', component: InvoicesComponent },
 
 
   // { path: 'dashboard/agent', component: AgentComponent , canActivate: [AuthGuard], data: { role: 'agent' } },
