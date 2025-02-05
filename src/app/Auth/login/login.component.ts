@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -17,7 +18,7 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
     const credentials = { email: this.email, password: this.password };
@@ -25,6 +26,7 @@ export class LoginComponent {
       response => {
       },
       error => {
+        console.error('Login error:', error);
         this.errorMessage = 'Erreur de connexion, veuillez vérifier vos identifiants.';
       }
     );

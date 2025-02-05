@@ -71,16 +71,16 @@ export class AuthService {
 
   private redirectBasedOnRole(role: string): void {
     switch (role) {
-      case 'Admin':
+      case 'admin':
         this.router.navigate(['/dashboard/admin']);
         break;
-      case 'Patient':
-        this.router.navigate(['/dashboard/patient']);
+      case 'agent':
+        this.router.navigate(['/dashboard/agent']);
         break;
-        case 'Doctor':
+        case 'driver':
           this.router.navigate(['/dashboard/doctor']);
           break;
-      case 'Accountant':
+      case 'superadmin':
         this.router.navigate(['/dashboard/accountant']);
         break;
       case 'Secretary':

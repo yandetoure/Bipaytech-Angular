@@ -1,0 +1,39 @@
+<div class="container mt-4">
+    <h2>Liste des Factures</h2>
+    <div class="mb-3">
+      <label for="filter">Filtrer par statut :</label>
+      <select [(ngModel)]="filtre" (change)="filtrerFactures()" class="form-control">
+        <option value="">Toutes</option>
+        <option value="payee">Payées</option>
+        <option value="impayee">Impayées</option>
+      </select>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Numéro</th>
+          <th>Client</th>
+          <th>Montant</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let facture of facturesFiltrees">
+          <td>{{ facture.numero }}</td>
+          <td>{{ facture.client }}</td>
+          <td>{{ facture.montant }} €</td>
+          <td>
+            <span [class.text-success]="facture.statut === 'payee'" [class.text-danger]="facture.statut === 'impayee'">
+              {{ facture.statut | titlecase }}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="voirDetails(facture.id)">Voir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  ```
+  

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="d-flex" id="wrapper">
+
+  <!-- Sidebar -->
+  <div class="sidebar bg-dark text-white p-3" [class.collapsed]="isSidebarCollapsed">
+    <h4 class="text-center" *ngIf="!isSidebarCollapsed">Menu</h4>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a routerLink="/dashboard/agent" class="nav-link text-white">
+          <i class="fas fa-home"></i> <span *ngIf="!isSidebarCollapsed">Accueil</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-white">
+          <i class="fas fa-file-invoice"></i> <span *ngIf="!isSidebarCollapsed">Clients</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-white">
+          <i class="fas fa-file-invoice"></i> <span *ngIf="!isSidebarCollapsed">Factures</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-white">
+          <i class="fas fa-file-invoice"></i> <span *ngIf="!isSidebarCollapsed">Reçus</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-white">
+          <i class="fas fa-chart-bar"></i> <span *ngIf="!isSidebarCollapsed">Statistiques</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link text-white">
+          <i class="fas fa-cog"></i> <span *ngIf="!isSidebarCollapsed">Paramètres</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Contenu Principal -->
+  <div id="page-content" class="flex-grow-1">
+    
+    <!-- Header -->
+    <div class="header d-flex justify-content-between align-items-center p-3 shadow-sm">
+      <button class="btn btn-dark" (click)="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </button>
+    
+      <div class="d-flex align-items-center">
+        <span class="mr-3">Agent: <strong>{{ userName }}</strong></span>
+    
+        <div class="dropdown mr-3" 
+             (mouseenter)="isDropdownOpen = true" 
+             (mouseleave)="isDropdownOpen = false">
+          <i class="fas fa-user-circle fa-lg dropdown-toggle" 
+             id="userIconDropdown" 
+             (click)="isDropdownOpen = !isDropdownOpen"></i>
+          <div class="dropdown-menu dropdown-menu-right" 
+               [ngClass]="{'show': isDropdownOpen}" 
+               aria-labelledby="userIconDropdown">
+            <a class="dropdown-item" href="#">Profil</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="#">Déconnexion</a>
+          </div>
+        </div>
+    
+        <div class="dropdown mr-3" 
+             (mouseenter)="isNotificationDropdownOpen = true" 
+             (mouseleave)="isNotificationDropdownOpen = false">
+          <button class="btn btn-link text-dark" 
+                  id="notificationDropdown" 
+                  (click)="isNotificationDropdownOpen = !isNotificationDropdownOpen">
+            <i class="fas fa-bell fa-lg"></i>
+            <span class="badge badge-danger">3</span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" 
+               [ngClass]="{'show': isNotificationDropdownOpen}" 
+               aria-labelledby="notificationDropdown">
+            <a class="dropdown-item" href="#">Notification 1</a>
+            <a class="dropdown-item" href="#">Notification 2</a>
+            <a class="dropdown-item" href="#">Notification 3</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Dashboard -->
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card p-3 shadow-sm">
+            <h5>Nombre de factures</h5>
+            <p class="display-6 text-primary">10</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3 shadow-sm">
+            <h5>Total encaissé</h5>
+            <p class="display-6 text-success">120.000 FCFA</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3 shadow-sm">
+            <h5>Clients actifs</h5>
+            <p class="display-6 text-warning">15</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
