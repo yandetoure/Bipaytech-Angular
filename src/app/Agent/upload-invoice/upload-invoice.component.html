@@ -1,39 +1,66 @@
 <div class="container mt-4">
     <div class="card p-4 shadow">
-      <h3 class="text-center">Téléchargement de la Facture</h3>
+      <h3 class="text-center">Paiement de Facture</h3>
   
-      <div class="mb-3 text-center">
-        <input type="file" class="form-control-file" (change)="onFileSelected($event)" accept=".pdf,.jpg,.png">
+      <!-- Barre de progression -->
+      <div class="progress mb-4">
+        <div class="progress-bar bg-success" role="progressbar" [style.width]="progress + '%'" aria-valuemin="0" aria-valuemax="100">
+          {{ progress }}%
+        </div>
       </div>
   
-      <div *ngIf="isProcessing" class="text-center">
-        <p class="text-info">Traitement en cours...</p>
+      <!-- Étapes avec icônes -->
+      <div class="progress-steps d-flex justify-content-between mb-4">
+        <div class="step" [class.active]="step >= 1"><i class="fas fa-file-upload"></i> <span>1. Upload</span></div>
+        <div class="step" [class.active]="step >= 2"><i class="fas fa-search"></i> <span>2. Vérification</span></div>
+        <div class="step" [class.active]="step >= 3"><i class="fas fa-credit-card"></i> <span>3. Paiement</span></div>
+        <div class="step" [class.active]="step >= 4"><i class="fas fa-check-circle"></i> <span>4. Terminé</span></div>
       </div>
   
-      <div *ngIf="extractedData">
-        <h4 class="text-center mt-3">Informations Extraites</h4>
-        <table class="table table-striped">
-          <tbody>
-            <tr><th>Entreprise</th><td>{{ extractedData.company }}</td></tr>
-            <tr><th>Adresse</th><td>{{ extractedData.address }}</td></tr>
-            <tr><th>Réf Client</th><td>{{ extractedData.clientReference }}</td></tr>
-            <tr><th>Numéro Facture</th><td>{{ extractedData.invoiceNumber }}</td></tr>
-            <tr><th>Montant</th><td>{{ extractedData.amount | currency:'CFA' }}</td></tr>
-            <tr><th>Charges</th><td>{{ extractedData.charges | currency:'CFA' }}</td></tr>
-            <tr><th>Total HT</th><td>{{ extractedData.totalHT | currency:'CFA' }}</td></tr>
-            <tr><th>Total TTC</th><td>{{ extractedData.totalTTC | currency:'CFA' }}</td></tr>
-          </tbody>
-        </table>
+      <!-- Étapes du paiement -->
+      <div *ngIf="step === 1" class="text-center">
+        <h5>Téléchargez votre facture</h5>
+        <input type="file" class="form-control-file mt-3" (change)="onFileSelected($event)" accept=".pdf,.jpg,.png">
+      </div>
   
-        <div class="text-center">
-          <button class="btn btn-success" (click)="processPayment()" [disabled]="isProcessing || isPaid">
-            Payer Maintenant
-          </button>
+      <div *ngIf="step === 2">
+        <h5 class="text-center">Vérification des Informations</h5>
+        <div *ngIf="isProcessing" class="text-center">
+          <p class="text-info">Traitement en cours...</p>
         </div>
   
-        <div *ngIf="isPaid" class="alert alert-success mt-3 text-center">
-          ✅ Paiement effectué avec succès !
+        <div *ngIf="extractedData">
+          <table class="table table-striped mt-3">
+            <tbody>
+              <tr><th>Entreprise</th><td>{{ extractedData.company }}</td></tr>
+              <tr><th>Adresse</th><td>{{ extractedData.address }}</td></tr>
+              <tr><th>Réf Client</th><td>{{ extractedData.clientReference }}</td></tr>
+              <tr><th>Numéro Facture</th><td>{{ extractedData.invoiceNumber }}</td></tr>
+              <tr><th>Montant</th><td>{{ extractedData.amount | currency:'CFA' }}</td></tr>
+              <tr><th>Charges</th><td>{{ extractedData.charges | currency:'CFA' }}</td></tr>
+              <tr><th>Total HT</th><td>{{ extractedData.totalHT | currency:'CFA' }}</td></tr>
+              <tr><th>Total TTC</th><td>{{ extractedData.totalTTC | currency:'CFA' }}</td></tr>
+            </tbody>
+          </table>
+  
+          <div class="d-flex justify-content-between mt-3">
+            <button class="btn btn-secondary" (click)="goBack()">Retour</button>
+            <button class="btn btn-success" (click)="processPayment()">Confirmer et Payer</button>
+          </div>
         </div>
+      </div>
+  
+      <div *ngIf="step === 3" class="text-center">
+        <h5>Paiement en cours...</h5>
+        <p class="text-info">Veuillez patienter pendant le traitement du paiement.</p>
+      </div>
+  
+      <div *ngIf="step === 4" class="text-center">
+        <h5 class="text-success">✅ Paiement effectué avec succès !</h5>
+        <p>La facture a été payée avec succès.</p>
+        <p><strong>Date :</strong> {{ paymentDate }}</p>
+        <p><strong>Méthode :</strong> Wizall</p>
+        <div class="paid-stamp">PAYÉ</div>
       </div>
     </div>
   </div>
