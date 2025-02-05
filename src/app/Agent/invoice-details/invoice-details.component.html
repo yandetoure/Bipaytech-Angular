@@ -1,1 +1,55 @@
-<p>invoice-details works!</p>
+<div class="container mt-4">
+    <div class="card p-4 shadow">
+      <h3 class="text-center">Détail de la Facture</h3>
+      
+      <!-- Informations du client -->
+      <div class="mb-4">
+        <h5><strong>Client :</strong> {{ invoice.client.name }}</h5>
+        <p><strong>Entreprise :</strong> {{ invoice.client.company }}</p>
+        <p><strong>Numéro Client :</strong> {{ invoice.client.clientNumber }}</p>
+      </div>
+  
+      <!-- Informations de la facture -->
+      <div class="mb-4">
+        <p><strong>Facture N° :</strong> {{ invoice.number }}</p>
+        <p><strong>Date :</strong> {{ invoice.date }}</p>
+      </div>
+  
+      <!-- Informations de la transaction -->
+      <div class="mb-4">
+        <p><strong>Référence Transaction :</strong> {{ invoice.transaction.reference }}</p>
+        <p><strong>Date de Transaction :</strong> {{ invoice.transaction.date }}</p>
+        <p><strong>Type de Transaction :</strong> {{ invoice.transaction.type }}</p>
+        <p><strong>Référence de la Facture :</strong> {{ invoice.transaction.invoiceReference }}</p>
+      </div>
+  
+      <!-- Tableau des articles -->
+      <table class="table table-striped">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th>Description</th>
+            <th>Quantité</th>
+            <th>Prix Unitaire</th>
+            <th>Montant</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of invoice.items">
+            <td>{{ item.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unitPrice | currency:'CFA' }}</td>
+            <td>{{ item.total | currency:'CFA' }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- Résumé du paiement -->
+      <div class="text-end mt-4">
+        <p><strong>Sous-total :</strong> {{ invoice.subtotal | currency:'CFA' }}</p>
+        <p><strong>Frais (1%) :</strong> {{ invoice.fees | currency:'CFA' }}</p>
+        <h4><strong>Total :</strong> {{ invoice.total | currency:'CFA' }}</h4>
+        <h4 class="text-success"><strong>Payé :</strong> {{ invoice.paid | currency:'CFA' }}</h4>
+      </div>
+    </div>
+  </div>
+  
